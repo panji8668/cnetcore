@@ -48,6 +48,7 @@ class CNet {
             console.log(`${req.query.kode} PAYMENT RESPONSE`);
             return resp.data
         } catch (error) {
+            console.log(error);
             return false
         }
     }
