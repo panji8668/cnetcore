@@ -41,7 +41,12 @@ class CNet {
                 tujuan:req.query.tujuan,
                 trxid:req.query.trxid,
                 tagihan:bayar
+
             }       
+            console.log(`${req.query.kode} CEK REQUEST`);
+            let respinq = await this.http.post(process.env.BASEURL+'/omnicheck',pdata);
+            console.log(`${req.query.kode} CEK RESPONSE`);
+
             console.log(`${req.query.kode} PAYMENT REQUEST`);
             console.log(JSON.stringify(pdata));                       
             let resp = await this.http.post(process.env.BASEURL+'/pay',pdata);
