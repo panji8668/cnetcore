@@ -30,7 +30,7 @@ class CNet {
         }
 
     }
-    async pay(){
+    async pay(req,bayar){
         try {                 
             var pdata = {
                 id:req.query.id,
@@ -40,7 +40,7 @@ class CNet {
                 vtype:req.query.kode,
                 tujuan:req.query.tujuan,
                 trxid:req.query.trxid,
-                tagihan:req.query.tagihan
+                tagihan:bayar
             }       
             console.log(`${req.query.kode} PAYMENT REQUEST`);
             console.log(JSON.stringify(pdata));                       
