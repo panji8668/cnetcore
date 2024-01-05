@@ -43,7 +43,7 @@ class CNet {
                 vtype: req.query.kode,
                 tujuan: req.query.tujuan,
                 trxid: req.query.trxid,
-                tagihan: bayar
+                tagihan: parseInt(bayar)-parseInt(process.env.ADMIN) 
 
             }
             console.log(`${req.query.kode} CEK REQUEST`);
