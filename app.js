@@ -22,10 +22,10 @@ app.use(
 app.get("/cnetcore/trx", async (req, res) => {
 
     let cnet = new CNet();
-    
+
     var tipetrx = req.query.tipe;
-    if(typeof tipetrx == 'undefined'){
-         res.json({ success: false, msg: "tipetrx kesalahan" });return;
+    if (typeof tipetrx == 'undefined') {
+        res.json({ success: false, msg: "tipetrx kesalahan" }); return;
     }
     if (parseInt(tipetrx) == 5) {
         let resp = await cnet.inq(req);
@@ -33,11 +33,11 @@ app.get("/cnetcore/trx", async (req, res) => {
     } else {
         try {
             let jmlbayar = await utils.runQuerySelectPromise(req, "select jumlahtagihan from tagihanppob where idpelanggan=? order by idtagihan desc limit 1 ", [req.query.tujuan]);
-            if(jmlbayar.length>0){
+            if (jmlbayar.length > 0) {
                 let resp = await cnet.pay(req, jmlbayar[0].jumlahtagihan);
                 res.json({ success: true, data: resp })
-            }else{
-                 res.json({ success: false, tujuan:req.query.tujuan, msg:"data inquiry tidak ada",})
+            } else {
+                res.json({ success: false, tujuan: req.query.tujuan, msg: "data inquiry tidak ada", })
             }
         } catch (error) {
             console.log(error);
@@ -45,7 +45,6 @@ app.get("/cnetcore/trx", async (req, res) => {
         }
     }
 });
-
 
 var port = process.env.PORT || 8080
 
